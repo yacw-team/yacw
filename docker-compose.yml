@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  yacw-frontend:
+    image: laoliu233/yacw-frontend:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+  yacw-backend:
+    image: laoliu233/yacw-backend:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080

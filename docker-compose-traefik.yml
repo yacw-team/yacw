@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  yacw-frontend:
+    image: laoliu233/yacw-frontend:latest
+    restart: unless-stopped
+    labels:
+       - "traefik.enable=true"
+       - "traefik.http.routers.yacw_frontend.rule=Host(`YOUR_DOMAIN`)"
+       - "traefik.http.routers.yacw_frontend.tls=true"
+       - "traefik.http.routers.yacw_frontend.tls.certresolver=myresolver"
+  yacw-backend:
+    image: laoliu233/yacw-backend:latest
+    restart: unless-stopped
+    environment:
+      SALT: [SALT]      # 用于加密密码的盐
+      API_PATH: [PATH]  # 后端 API 的前缀，如 /api。用于部署
+    labels:
+       - "traefik.enable=true"
+       - "traefik.http.routers.yacw_backend.rule=Host(`YOUR_DOMAIN`) && PathPrefix(`/api`)"
+       - "traefik.http.routers.yacw_backend.tls=true"
+       - "traefik.http.routers.yacw_backend.tls.certresolver=myresolver"

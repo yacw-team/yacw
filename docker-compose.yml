@@ -12,5 +12,5 @@ services:
     ports:
       - 8080:8080
     environment:
-      SALT: ""          # salt for password encrtption
-      API_PATH: "/api"  # API prefix, deployment need
+      SALT: [SALT]      # 用于加密密码的盐
+      API_PATH: [PATH]  # 后端 API 的前缀，如 /api。用于部署
